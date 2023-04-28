@@ -109,7 +109,7 @@ private  fun NavigationGraph(
         modifier = modifier.padding(innerPadding)
     ){
         composable(route = AppScreen.Home.name){
-
+            HomeScreen()
         }
         composable(route = AppScreen.Settings.name){
 
