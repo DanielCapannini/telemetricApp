@@ -74,6 +74,7 @@ fun TopAppBar(
 fun NavigationApp(
     navController: NavHostController = rememberNavController()
 ){
-
+    val backStackEntry by navController.currentBackStackEntryAsState()
+    val currentScreen = backStackEntry?.destination?.route ?: AppScreen.Home.name
 }
 
