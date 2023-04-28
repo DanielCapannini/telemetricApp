@@ -1,6 +1,8 @@
 package com.example.appandroid
 
 import android.graphics.drawable.Icon
+import androidx.compose.foundation.layout.PaddingValues
+import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.ArrowBack
 import androidx.compose.material.icons.filled.Settings
@@ -9,12 +11,17 @@ import androidx.compose.material3.ExperimentalMaterial3Api
 import androidx.compose.material3.Icon
 import androidx.compose.material3.IconButton
 import androidx.compose.material3.MaterialTheme
+import androidx.compose.material3.Scaffold
 import androidx.compose.material3.Text
 import androidx.compose.material3.TopAppBarDefaults
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.text.font.FontWeight
 import androidx.navigation.NavHostController
+import androidx.navigation.compose.NavHost
+import androidx.navigation.compose.composable
+import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
 
 sealed class AppScreen(val name: String) {
@@ -76,5 +83,46 @@ fun NavigationApp(
 ){
     val backStackEntry by navController.currentBackStackEntryAsState()
     val currentScreen = backStackEntry?.destination?.route ?: AppScreen.Home.name
+
+    Scaffold(
+        topBar = {
+            TopAppBar(
+                currentScreen = currentScreen,
+                canNavigateBack = navController.previousBackStackEntry != null,
+                navigateUp = { navController.navigateUp() },
+                onSettingsButtonClicker = {navController.navigate(AppScreen.Settings.name)})
+        }
+    ){
+        innerPadding -> NavigationGraph(navController, innerPadding)
+    }
+}
+
+@Composable
+private  fun NavigationGraph(
+    navController: NavHostController,
+    innerPadding: PaddingValues,
+    modifier: Modifier = Modifier
+){
+    NavHost(
+        navController = navController,
+        startDestination = AppScreen.Home.name,
+        modifier = modifier.padding(innerPadding)
+    ){
+        composable(route = AppScreen.Home.name){
+
+        }
+        composable(route = AppScreen.Settings.name){
+
+        }
+        composable(route = AppScreen.History.name){
+
+        }
+        composable(route = AppScreen.Session.name){
+
+        }
+        composable(route = AppScreen.Registration.name){
+            
+        }
+    }
 }
 
