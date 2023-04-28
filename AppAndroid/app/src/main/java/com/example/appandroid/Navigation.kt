@@ -121,7 +121,7 @@ private  fun NavigationGraph(
 
         }
         composable(route = AppScreen.Registration.name){
-            
+            ShowSignUpPage()
         }
     }
 }
