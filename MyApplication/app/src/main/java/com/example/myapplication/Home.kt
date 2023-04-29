@@ -1,9 +1,6 @@
 package com.example.myapplication
 
-import androidx.compose.foundation.layout.Column
-import androidx.compose.foundation.layout.Spacer
-import androidx.compose.foundation.layout.padding
-import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.layout.*
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
 import androidx.compose.material.icons.filled.ArrowBack
@@ -18,12 +15,13 @@ import androidx.compose.ui.unit.dp
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
 fun HomeScreen(sessioButton: () -> Unit) {
-
+    Spacer(modifier = Modifier.height(5000.dp))
     IconButton(onClick = sessioButton){
         Icon(
             imageVector = Icons.Filled.PlayArrow,
             contentDescription = "Play Session"
         )
+
     }
 
 }
