@@ -132,7 +132,9 @@ private  fun NavigationGraph(
         modifier = modifier.padding(innerPadding)
     ){
         composable(route = AppScreen.Home.name){
-            HomeScreen()
+            HomeScreen(
+                sessioButton = {navController.navigate(AppScreen.Session.name)}
+            )
         }
         composable(route = AppScreen.Settings.name){
             SettingsScreen()
