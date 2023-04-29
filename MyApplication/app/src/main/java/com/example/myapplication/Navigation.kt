@@ -3,8 +3,7 @@ package com.example.myapplication
 import androidx.compose.foundation.layout.PaddingValues
 import androidx.compose.foundation.layout.padding
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.filled.ArrowBack
-import androidx.compose.material.icons.filled.Settings
+import androidx.compose.material.icons.filled.*
 import androidx.compose.material3.*
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -15,6 +14,8 @@ import androidx.navigation.compose.NavHost
 import androidx.navigation.compose.composable
 import androidx.navigation.compose.currentBackStackEntryAsState
 import androidx.navigation.compose.rememberNavController
+import androidx.compose.material3.BottomAppBar
+import com.google.android.material.bottomappbar.BottomAppBar
 
 sealed class AppScreen(val name: String) {
     object Home : AppScreen("Home")
@@ -24,6 +25,32 @@ sealed class AppScreen(val name: String) {
 
     object Session : AppScreen("Session Screen")
 }
+
+
+@Composable
+fun bottonBar(
+    onSettingsButtonClicker: () -> Unit,
+    onHomeButtonClicker: () -> Unit,
+    onHistoryButtonClicker: () -> Unit,
+    onRegistrationButtonClicker: () -> Unit
+){
+    val navController: NavHostController = rememberNavController()
+    BottomAppBar {
+        IconButton(onClick = onHomeButtonClicker) {
+            Icon(Icons.Filled.Home, contentDescription = "Home")
+        }
+        IconButton(onClick = onSettingsButtonClicker) {
+            Icon(Icons.Filled.Settings, contentDescription = "Settings")
+        }
+        IconButton(onClick = onHistoryButtonClicker) {
+            Icon(Icons.Filled.List, contentDescription = "History")
+        }
+        IconButton(onClick = onRegistrationButtonClicker) {
+            Icon(Icons.Filled.Build, contentDescription = "Registration")
+        }
+    }
+}
+
 
 @OptIn(ExperimentalMaterial3Api::class)
 @Composable
@@ -83,6 +110,14 @@ fun NavigationApp(
                 canNavigateBack = navController.previousBackStackEntry != null,
                 navigateUp = { navController.navigateUp() },
                 onSettingsButtonClicker = {navController.navigate(AppScreen.Settings.name)})
+        },
+        bottomBar = {
+            bottonBar(
+                onSettingsButtonClicker = {navController.navigate(AppScreen.Settings.name)},
+                onHomeButtonClicker = {navController.navigate(AppScreen.Home.name)},
+                onHistoryButtonClicker = {navController.navigate(AppScreen.History.name)},
+                onRegistrationButtonClicker = {navController.navigate(AppScreen.Registration.name)}
+            )
         }
     ){
         innerPadding -> NavigationGraph(navController, innerPadding)
