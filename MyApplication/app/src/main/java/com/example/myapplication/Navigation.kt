@@ -139,13 +139,13 @@ private  fun NavigationGraph(
             HomeScreen()
         }
         composable(route = AppScreen.Settings.name){
-
+            SettingsScreen()
         }
         composable(route = AppScreen.History.name){
-
+            HistoryScreen()
         }
         composable(route = AppScreen.Session.name){
-
+            SessionScreen()
         }
         composable(route = AppScreen.Registration.name){
             ShowSignUpPage()
