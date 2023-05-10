@@ -6,17 +6,16 @@ import androidx.room.PrimaryKey
 import java.util.UUID
 
 @Entity(tableName = "user")
-data class User {
+data class User (
     @PrimaryKey
     val id: String = UUID.randomUUID().toString(),
 
     @ColumnInfo(name = "user_name")
-    val username: String,
+    var username: String,
 
     @ColumnInfo(name = "user_emal")
-    val usermail: String,
+    var usermail: String,
 
     @ColumnInfo(name = "user_passowrd")
-    val password: String
-
-}
+    var password: String
+)
