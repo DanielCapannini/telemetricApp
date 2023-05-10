@@ -1,8 +1,6 @@
 package com.example.myapplication.data
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.util.*
 
 @Entity(tableName = "session")
@@ -19,3 +17,10 @@ data class Session (
     @ColumnInfo(name = "date")
     var date: Date
         )
+
+data class UserWithSession(
+    @Embedded val user: User,
+    @Relation(parentColumn = "id",
+        entityColumn = "idUser")
+    val Sessions: List<Session>
+)

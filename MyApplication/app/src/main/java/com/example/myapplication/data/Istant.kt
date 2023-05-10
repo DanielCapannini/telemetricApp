@@ -1,8 +1,6 @@
 package com.example.myapplication.data
 
-import androidx.room.ColumnInfo
-import androidx.room.Entity
-import androidx.room.PrimaryKey
+import androidx.room.*
 import java.util.*
 
 @Entity(tableName = "instant")
@@ -11,23 +9,30 @@ data class Instant (
     val idInstant: String = UUID.randomUUID().toString(),
 
     @ColumnInfo(name = "is_session")
-    var idSession: String,
+    var idParent: String,
 
     @ColumnInfo(name = "latitude")
-    var latitude: String,
+    var latitude: Double,
 
     @ColumnInfo(name = "longitude")
-    var longitude: String,
+    var longitude: Double,
 
     @ColumnInfo(name = "acceleration_x")
-    var accelerationX: String,
+    var accelerationX: Double,
 
     @ColumnInfo(name = "acceleration_y")
-    var accelerationY: String,
+    var accelerationY: Double,
 
     @ColumnInfo(name = "acceleration_z")
-    var accelerationZ: String,
+    var accelerationZ: Double,
 
     @ColumnInfo(name = "datetime")
     var datetime: Date
-        )
+    )
+
+data class SessionWithInstant(
+    @Embedded val session: Session,
+    @Relation(parentColumn = "idSession",
+              entityColumn = "idParent")
+    val instants: List<Instant>
+)
