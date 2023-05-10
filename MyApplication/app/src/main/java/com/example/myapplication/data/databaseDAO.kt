@@ -7,7 +7,6 @@ import androidx.room.OnConflictStrategy
 @Dao
 interface databaseDAO {
 
-
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertUser(user: User)
 
@@ -16,4 +15,6 @@ interface databaseDAO {
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     fun insertInstant(instant: Instant)
+
+    
 }
